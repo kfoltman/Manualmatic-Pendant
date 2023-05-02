@@ -108,13 +108,19 @@ void ManualmaticControl::setupButtons() {
   buttonOnOff.setLongClickDuration(longClickDuration);
 
   buttonX.setClickHandler([&](EventButton &btn) { toggleXSelected(btn); });  
+  buttonX.setLongPressHandler([&](EventButton &btn) { zeroAxis(AXIS_X); });
   buttonX.setLongClickDuration(longClickDuration);
+  buttonX.setMultiClickInterval(10);
 
   buttonY.setClickHandler([&](EventButton &btn) { toggleYSelected(btn); });  
+  buttonY.setLongPressHandler([&](EventButton &btn) { zeroAxis(AXIS_Y); });
   buttonY.setLongClickDuration(longClickDuration);
+  buttonY.setMultiClickInterval(10);
   
   buttonZ.setClickHandler([&](EventButton &btn) { toggleZSelected(btn); });  
+  buttonZ.setLongPressHandler([&](EventButton &btn) { zeroAxis(AXIS_Z); });
   buttonZ.setLongClickDuration(longClickDuration);
+  buttonZ.setMultiClickInterval(10);
   
   
   buttonA.setClickHandler([&](EventButton &btn) { toggleASelected(btn); });  
@@ -376,6 +382,13 @@ void ManualmaticControl::toggleSelectedAxis(Axis_e axis) {
     } else if ( state.displayedAxes > axis  ) {
       state.currentAxis = axis;
     }
+  }
+}
+/** ********************************************************************** */
+void ManualmaticControl::zeroAxis(Axis_e axis) {
+  if ( state.isScreen(SCREEN_MANUAL) && state.isReady() && !state.isAuto() ) {
+    char buf[20] = {'0', '\0'};
+    messenger.sendG5xOffset(axis, buf);
   }
 }
 /** ********************************************************************** */

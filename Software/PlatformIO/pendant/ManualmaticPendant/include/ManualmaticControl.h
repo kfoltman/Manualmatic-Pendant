@@ -159,6 +159,7 @@ class ManualmaticControl {
     void displayDtg(EventButton& btn);
     void onButtonALongPressed(EventButton& rb);
     void toggleDisplayAAxis(EventButton& btn);
+    void zeroAxis(Axis_e axis);
 
     void onButtonModeClicked(EventButton& btn);
     /**
