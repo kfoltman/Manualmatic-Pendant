@@ -36,7 +36,9 @@ class ManualmaticConfig {
     float max_rapid_override = 1.2; //@TODO set in ini?
     float min_spindle_override = 0.5;
     float max_spindle_override = 1.5;
-    float default_spindle_speed = 450;
+    float default_spindle_speed = 1000;
+    float max_spindle_speed = 3000;
+    float spindle_increment = 100;
     // In machine units per second - converted in setIniValue() to machine units per minute
     float default_linear_velocity = 1;
     float max_linear_velocity = 5;
@@ -44,6 +46,7 @@ class ManualmaticConfig {
 
     float jogIncrements[4] = {0.001, 0.01, 0.1, 1}; //Local display only
     float defaultJogVelocity[2] = {100, 1000}; //mm/min
+    float defaultJogTortoisePct = 10;
     float minJogVelocity = 15;
     float maxJogVelocity = 1500;
 
@@ -57,6 +60,14 @@ class ManualmaticConfig {
     uint8_t numJoystickIncrements = 8;
     Axis_e joystickAxisDefault[2] = {AXIS_X, AXIS_Y};
     Axis_e joystickAxisAlt[2] = {AXIS_A, AXIS_Z};
+
+    uint16_t errorMessageTimeout = 2000;
+    // Display an indicator of the heartbeat
+    bool showPulse = true;
+    
+    // It would be so much easier to use 'forceHoming' but this is the LinuxCNC convention
+    // [TRAJ] NO_FORCE_HOMING defaults to 0 if not specified in ini file.
+    bool noForceHoming = false;
   
 };
 

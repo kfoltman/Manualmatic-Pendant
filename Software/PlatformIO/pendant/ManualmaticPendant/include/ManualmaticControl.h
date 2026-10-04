@@ -96,10 +96,6 @@ class ManualmaticControl {
 
     ButtonRow_e buttonRow = BUTTON_ROW_NONE;
 
-    unsigned long now = millis();
-    unsigned long lastHeartbeat = 0;
-
-
     void setupEncoders();
     void setupButtons();
     void setupButtonRowKeypad();
@@ -107,6 +103,7 @@ class ManualmaticControl {
     void setupJoystick();
 
     void checkEstop(bool force=false);
+    void checkHeartbeat();
     void onIniReceived();
 
     void onFeedEncoder(EncoderButton& rb);
@@ -116,7 +113,7 @@ class ManualmaticControl {
 
     void onSpindleEncoder(EncoderButton& rb);
     void onSpindleClicked(EncoderButton& rb);
-    void onSpindleDoubleClicked(EncoderButton& rb);
+    void onSpindleTripleClicked(EncoderButton& rb);
     void onSpindleLongPressed(EncoderButton& rb);
 
     void onMpgEncoder(EncoderButton& rb);
@@ -198,6 +195,7 @@ class ManualmaticControl {
     void setRowButtonType(uint8_t col, ButtonType_e bt);
     void setButtonRowManual(ButtonRow_e b);
     void setButtonRowAuto(ButtonRow_e b);
+    void setButtonRowMdi(ButtonRow_e b);
     void setButtonRowCancelOrStop(ButtonRow_e b);
     void setButtonRowCancelOrTick(ButtonRow_e b);
     void setButtonRowCancelOrTickG5x(ButtonRow_e b);
